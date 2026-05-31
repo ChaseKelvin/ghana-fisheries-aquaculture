@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ffa4b2eade8aa21b8ba4c658040369ab {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position:fixed;bottom:40px;left:40px;z-index:1000;
+            background:white;padding:14px 18px;border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.2);font-family:Arial;font-size:12px;">
+    <b style="font-size:13px;">🇬🇭 Ghana Fisheries Map</b><br>
+    <span style="font-size:11px;color:#888;">Major fishing & aquaculture sites</span><br><br>
+    <span style="color:#1A6FAF;">📍</span> <b>Marine</b> — Coastal Atlantic sites<br>
+    <span style="color:#2A9D8F;">📍</span> <b>Inland</b> — Rivers & lake sites<br>
+    <span style="color:#E9A020;">📍</span> <b>Aquaculture</b> — Fish farming zones<br><br>
+    <span style="font-size:11px;color:#888;">Click markers for full site details<br>
+    Toggle layers using top-right control</span>
+</div>
+    
+<div style="position:fixed;top:12px;left:50%;transform:translateX(-50%);
+            z-index:1000;background:white;padding:10px 20px;
+            border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);
+            font-family:Arial;font-size:14px;font-weight:bold;color:#333;">
+    Ghana Fisheries & Aquaculture — Key Production Sites
+</div>
+    
+            <div class="folium-map" id="map_ffa4b2eade8aa21b8ba4c658040369ab" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ffa4b2eade8aa21b8ba4c658040369ab = L.map(
+                "map_ffa4b2eade8aa21b8ba4c658040369ab",
+                {
+                    center: [7.9, -1.2],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+
+            
+
+        
+    
+            var tile_layer_31960ea2fa066af8c25ed486edbc0abb = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_31960ea2fa066af8c25ed486edbc0abb.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var tile_layer_25c86cf5d319301450692e708d7dfb23 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_25c86cf5d319301450692e708d7dfb23.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var tile_layer_f6f64be0793d1e08bf8ab4cb08706f02 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f6f64be0793d1e08bf8ab4cb08706f02.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var feature_group_07205a198302d403e9f6fb10d2eee347 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_40324d23e123f00d0142d73feb6f7044 = L.marker(
+                [5.6415, -0.0165],
+                {
+}
+            ).addTo(feature_group_07205a198302d403e9f6fb10d2eee347);
+        
+    
+            var icon_2ecb068495ebacdf04ecca6ec1224144 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "tint",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bb4fd64f5204a514e62a43f2aed1b826 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_be15e0c3435cfdfa9a56c462cfdd7f50 = $(`<div id="html_be15e0c3435cfdfa9a56c462cfdd7f50" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#1A6FAF;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Tema Fishing Harbour</b><br>             <span style="font-size:11px;opacity:0.9;">Greater Accra Region — Marine Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Sardinella, Tuna, Mackerel</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~800 canoes + industrial vessels</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~65,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">IUU fishing, fleet overcapacity</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Largest industrial fishing port in Ghana</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_bb4fd64f5204a514e62a43f2aed1b826.setContent(html_be15e0c3435cfdfa9a56c462cfdd7f50);
+            
+        
+
+        marker_40324d23e123f00d0142d73feb6f7044.bindPopup(popup_bb4fd64f5204a514e62a43f2aed1b826)
+        ;
+
+        
+    
+    
+            marker_40324d23e123f00d0142d73feb6f7044.bindTooltip(
+                `<div>
+                     🌊 Tema Fishing Harbour
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_40324d23e123f00d0142d73feb6f7044.setIcon(icon_2ecb068495ebacdf04ecca6ec1224144);
+            
+    
+            var marker_1260e15497deadf222cde3c5fdc80298 = L.marker(
+                [5.0833, -1.35],
+                {
+}
+            ).addTo(feature_group_07205a198302d403e9f6fb10d2eee347);
+        
+    
+            var icon_af71cf04ff74b70b565f6e818fc77e6e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "tint",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7b42fa3f2ef00a5df6fc06cd4ed1e1ec = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3fd4a824e0e0c48ddbe76737e2424e0b = $(`<div id="html_3fd4a824e0e0c48ddbe76737e2424e0b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#1A6FAF;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Elmina Fishing Village</b><br>             <span style="font-size:11px;opacity:0.9;">Central Region — Marine Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Sardinella, Herring, Anchovy</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~1,200 artisanal canoes</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~18,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Stock depletion, rising SST</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Oldest fishing community in Ghana, UNESCO heritage area</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_7b42fa3f2ef00a5df6fc06cd4ed1e1ec.setContent(html_3fd4a824e0e0c48ddbe76737e2424e0b);
+            
+        
+
+        marker_1260e15497deadf222cde3c5fdc80298.bindPopup(popup_7b42fa3f2ef00a5df6fc06cd4ed1e1ec)
+        ;
+
+        
+    
+    
+            marker_1260e15497deadf222cde3c5fdc80298.bindTooltip(
+                `<div>
+                     🌊 Elmina Fishing Village
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1260e15497deadf222cde3c5fdc80298.setIcon(icon_af71cf04ff74b70b565f6e818fc77e6e);
+            
+    
+            var marker_4e204acd589a844dea0f70519ac1d50d = L.marker(
+                [5.9167, 0.9833],
+                {
+}
+            ).addTo(feature_group_07205a198302d403e9f6fb10d2eee347);
+        
+    
+            var icon_56a6b1c9b1a7e7916c7cad8c4d10ff5f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "tint",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b38373a173146d9410f7887dd9e266a2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d1830578332c5db4243176a0ceed7228 = $(`<div id="html_d1830578332c5db4243176a0ceed7228" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#1A6FAF;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Keta Lagoon & Coast</b><br>             <span style="font-size:11px;opacity:0.9;">Volta Region — Marine Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Mullet, Shrimp</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~600 artisanal canoes</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~8,500 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Coastal erosion, sea level rise, salinity changes</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Major lagoon fishery, supports coastal livelihoods</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_b38373a173146d9410f7887dd9e266a2.setContent(html_d1830578332c5db4243176a0ceed7228);
+            
+        
+
+        marker_4e204acd589a844dea0f70519ac1d50d.bindPopup(popup_b38373a173146d9410f7887dd9e266a2)
+        ;
+
+        
+    
+    
+            marker_4e204acd589a844dea0f70519ac1d50d.bindTooltip(
+                `<div>
+                     🌊 Keta Lagoon & Coast
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4e204acd589a844dea0f70519ac1d50d.setIcon(icon_56a6b1c9b1a7e7916c7cad8c4d10ff5f);
+            
+    
+            var marker_eb5ba9f0a7fcfc3cedeafcac3c96547f = L.marker(
+                [4.8697, -2.2406],
+                {
+}
+            ).addTo(feature_group_07205a198302d403e9f6fb10d2eee347);
+        
+    
+            var icon_05ebc38df28efcf4e746048aa3d1ad6a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "tint",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3937063666e596f7495ee74ad2eb725b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bd5e02235eed359d5ffd05794ebe15ad = $(`<div id="html_bd5e02235eed359d5ffd05794ebe15ad" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#1A6FAF;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Axim Coastal Fishery</b><br>             <span style="font-size:11px;opacity:0.9;">Western Region — Marine Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tuna, Barracuda, Snapper</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~400 artisanal canoes</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~6,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Oil spill risk, habitat degradation</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Western coastal fishing hub near oil production zone</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_3937063666e596f7495ee74ad2eb725b.setContent(html_bd5e02235eed359d5ffd05794ebe15ad);
+            
+        
+
+        marker_eb5ba9f0a7fcfc3cedeafcac3c96547f.bindPopup(popup_3937063666e596f7495ee74ad2eb725b)
+        ;
+
+        
+    
+    
+            marker_eb5ba9f0a7fcfc3cedeafcac3c96547f.bindTooltip(
+                `<div>
+                     🌊 Axim Coastal Fishery
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eb5ba9f0a7fcfc3cedeafcac3c96547f.setIcon(icon_05ebc38df28efcf4e746048aa3d1ad6a);
+            
+    
+            var marker_a3d392ac0951d583775a3cd806163fe0 = L.marker(
+                [5.35, -0.6167],
+                {
+}
+            ).addTo(feature_group_07205a198302d403e9f6fb10d2eee347);
+        
+    
+            var icon_974ad7d061be97af0c036f9ac5a7e953 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "tint",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_820f2674cc99e951b0d0ae20725cc36e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_57e63d7e989d514fc006d9ecdbaf9bfa = $(`<div id="html_57e63d7e989d514fc006d9ecdbaf9bfa" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#1A6FAF;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Winneba Fishing Harbour</b><br>             <span style="font-size:11px;opacity:0.9;">Central Region — Marine Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Sardinella, Mackerel, Tuna</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~700 artisanal canoes</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~9,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Overfishing, juvenile fish harvest</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Major central coast landing site</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_820f2674cc99e951b0d0ae20725cc36e.setContent(html_57e63d7e989d514fc006d9ecdbaf9bfa);
+            
+        
+
+        marker_a3d392ac0951d583775a3cd806163fe0.bindPopup(popup_820f2674cc99e951b0d0ae20725cc36e)
+        ;
+
+        
+    
+    
+            marker_a3d392ac0951d583775a3cd806163fe0.bindTooltip(
+                `<div>
+                     🌊 Winneba Fishing Harbour
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a3d392ac0951d583775a3cd806163fe0.setIcon(icon_974ad7d061be97af0c036f9ac5a7e953);
+            
+    
+            feature_group_07205a198302d403e9f6fb10d2eee347.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var feature_group_489859e519b0967fdef9354da819eb48 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fbaa6482393b8d3a687edd2e90731a2c = L.marker(
+                [8.2167, -0.6333],
+                {
+}
+            ).addTo(feature_group_489859e519b0967fdef9354da819eb48);
+        
+    
+            var icon_861d8ae7faa71c188abc4114b14704b8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5d727ec8387d7aa47098897da258ae5f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0c9ede91f5497806db746f30280a8ff9 = $(`<div id="html_0c9ede91f5497806db746f30280a8ff9" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#2A9D8F;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Lake Volta — Yeji Basin</b><br>             <span style="font-size:11px;opacity:0.9;">Bono East Region — Inland Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Nile Perch, Catfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~15,000 artisanal fishers</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~8,000 tonnes/year (down from 35,000 in 1970s)</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Stock collapse, water hyacinth, sedimentation</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Largest inland fishery — once richest zone of Lake Volta</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_5d727ec8387d7aa47098897da258ae5f.setContent(html_0c9ede91f5497806db746f30280a8ff9);
+            
+        
+
+        marker_fbaa6482393b8d3a687edd2e90731a2c.bindPopup(popup_5d727ec8387d7aa47098897da258ae5f)
+        ;
+
+        
+    
+    
+            marker_fbaa6482393b8d3a687edd2e90731a2c.bindTooltip(
+                `<div>
+                     🏞️ Lake Volta — Yeji Basin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fbaa6482393b8d3a687edd2e90731a2c.setIcon(icon_861d8ae7faa71c188abc4114b14704b8);
+            
+    
+            var marker_6d3490f5cae6c6a95e7c3b5a7825d687 = L.marker(
+                [7.0333, 0.3],
+                {
+}
+            ).addTo(feature_group_489859e519b0967fdef9354da819eb48);
+        
+    
+            var icon_7700a97333317906f6307191c09bcf14 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c1e87a031e25cd0b8d5649e588634cd8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b8a04eaf0dd3c215d683141fbf433210 = $(`<div id="html_b8a04eaf0dd3c215d683141fbf433210" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#2A9D8F;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Lake Volta — Kpando Area</b><br>             <span style="font-size:11px;opacity:0.9;">Oti Region — Inland Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Heterotis, Catfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~8,000 artisanal fishers</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~5,500 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Declining water levels, climate variability</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Eastern Volta basin — important for Volta Region food security</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_c1e87a031e25cd0b8d5649e588634cd8.setContent(html_b8a04eaf0dd3c215d683141fbf433210);
+            
+        
+
+        marker_6d3490f5cae6c6a95e7c3b5a7825d687.bindPopup(popup_c1e87a031e25cd0b8d5649e588634cd8)
+        ;
+
+        
+    
+    
+            marker_6d3490f5cae6c6a95e7c3b5a7825d687.bindTooltip(
+                `<div>
+                     🏞️ Lake Volta — Kpando Area
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6d3490f5cae6c6a95e7c3b5a7825d687.setIcon(icon_7700a97333317906f6307191c09bcf14);
+            
+    
+            var marker_e0ad7e424b396c543a1c714a882edd73 = L.marker(
+                [5.75, -1.6],
+                {
+}
+            ).addTo(feature_group_489859e519b0967fdef9354da819eb48);
+        
+    
+            var icon_2820dbfd333e66d8cbd9d7a500cd5aaf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ee8714dcc8966b696f997c5ddc2c2efb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e28e441d095b73717761f9132e092b9a = $(`<div id="html_e28e441d095b73717761f9132e092b9a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#2A9D8F;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Pra River Basin</b><br>             <span style="font-size:11px;opacity:0.9;">Central / Western Region — Inland Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Catfish, Nile Perch</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~3,500 artisanal fishers</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~2,800 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Heavy metal contamination from galamsey, turbidity</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Major river fishery — heavily impacted by galamsey contamination</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_ee8714dcc8966b696f997c5ddc2c2efb.setContent(html_e28e441d095b73717761f9132e092b9a);
+            
+        
+
+        marker_e0ad7e424b396c543a1c714a882edd73.bindPopup(popup_ee8714dcc8966b696f997c5ddc2c2efb)
+        ;
+
+        
+    
+    
+            marker_e0ad7e424b396c543a1c714a882edd73.bindTooltip(
+                `<div>
+                     🏞️ Pra River Basin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e0ad7e424b396c543a1c714a882edd73.setIcon(icon_2820dbfd333e66d8cbd9d7a500cd5aaf);
+            
+    
+            var marker_18f145ccfcd36be3f5eec5b50210ad84 = L.marker(
+                [6.55, -3.15],
+                {
+}
+            ).addTo(feature_group_489859e519b0967fdef9354da819eb48);
+        
+    
+            var icon_5c0f172ddb0fc3d14d948cf0ee91246a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c0c7f5e850864b6a2a17441fe7747832 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7243c7b50ce0cd9e9a7d4fb33e6a07c8 = $(`<div id="html_7243c7b50ce0cd9e9a7d4fb33e6a07c8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#2A9D8F;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Bia River & Reservoir</b><br>             <span style="font-size:11px;opacity:0.9;">Western North Region — Inland Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Mudfish, Catfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~1,200 artisanal fishers</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~1,500 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Deforestation, mining runoff</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Western river system near Bia National Park</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_c0c7f5e850864b6a2a17441fe7747832.setContent(html_7243c7b50ce0cd9e9a7d4fb33e6a07c8);
+            
+        
+
+        marker_18f145ccfcd36be3f5eec5b50210ad84.bindPopup(popup_c0c7f5e850864b6a2a17441fe7747832)
+        ;
+
+        
+    
+    
+            marker_18f145ccfcd36be3f5eec5b50210ad84.bindTooltip(
+                `<div>
+                     🏞️ Bia River & Reservoir
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_18f145ccfcd36be3f5eec5b50210ad84.setIcon(icon_5c0f172ddb0fc3d14d948cf0ee91246a);
+            
+    
+            var marker_d416c9ff8636da1f951e4693e1672d5c = L.marker(
+                [10.9167, -1.0833],
+                {
+}
+            ).addTo(feature_group_489859e519b0967fdef9354da819eb48);
+        
+    
+            var icon_924b53b9f2c2ca0793f86b48c2124b5e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d5726d972a4a7932a0dc2e7972aa9758 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0d8430f41c52c593f6ad2f7c5b61e9f2 = $(`<div id="html_0d8430f41c52c593f6ad2f7c5b61e9f2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#2A9D8F;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">White Volta — Northern Basin</b><br>             <span style="font-size:11px;opacity:0.9;">Upper West / Upper East Region — Inland Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Catch Focus</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Catfish, Mudfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⛵ Fleet</td>                 <td style="padding:5px 8px;">~4,000 artisanal fishers</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Annual Catch</td>                 <td style="padding:5px 8px;font-weight:bold;color:#08519C;">~3,200 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚠️ Main Threat</td>                 <td style="padding:5px 8px;color:#c0392b;">Seasonal flow variability, drought, climate change</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Critical protein source for northern Ghana communities</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_d5726d972a4a7932a0dc2e7972aa9758.setContent(html_0d8430f41c52c593f6ad2f7c5b61e9f2);
+            
+        
+
+        marker_d416c9ff8636da1f951e4693e1672d5c.bindPopup(popup_d5726d972a4a7932a0dc2e7972aa9758)
+        ;
+
+        
+    
+    
+            marker_d416c9ff8636da1f951e4693e1672d5c.bindTooltip(
+                `<div>
+                     🏞️ White Volta — Northern Basin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d416c9ff8636da1f951e4693e1672d5c.setIcon(icon_924b53b9f2c2ca0793f86b48c2124b5e);
+            
+    
+            feature_group_489859e519b0967fdef9354da819eb48.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_62870fb45e2e30803fee24ad97af12c9 = L.marker(
+                [6.3, 0.0667],
+                {
+}
+            ).addTo(feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf);
+        
+    
+            var icon_c434e00f67baf114f62991987990c3d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "pagelines",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_191aabc3ecb821e9f2c6b3512cf929df = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f710127e0da7da0253f91c055a2e85d7 = $(`<div id="html_f710127e0da7da0253f91c055a2e85d7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#E9A020;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Akosombo Cage Culture Zone</b><br>             <span style="font-size:11px;opacity:0.9;">Eastern Region — Aquaculture Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Species</td>                 <td style="padding:5px 8px;font-weight:bold;">Nile Tilapia (Oreochromis niloticus)</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚙️ System</td>                 <td style="padding:5px 8px;">Floating cage culture on Lake Volta</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Production</td>                 <td style="padding:5px 8px;font-weight:bold;color:#238B45;">~85,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">🏭 Farms</td>                 <td style="padding:5px 8px;">~3,200 registered cage farms</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Fastest growing aquaculture zone in Ghana</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_191aabc3ecb821e9f2c6b3512cf929df.setContent(html_f710127e0da7da0253f91c055a2e85d7);
+            
+        
+
+        marker_62870fb45e2e30803fee24ad97af12c9.bindPopup(popup_191aabc3ecb821e9f2c6b3512cf929df)
+        ;
+
+        
+    
+    
+            marker_62870fb45e2e30803fee24ad97af12c9.bindTooltip(
+                `<div>
+                     🐟 Akosombo Cage Culture Zone
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62870fb45e2e30803fee24ad97af12c9.setIcon(icon_c434e00f67baf114f62991987990c3d6);
+            
+    
+            var marker_5dcc03e2c34b43dbb302170a3fe9d9b9 = L.marker(
+                [7.75, -0.25],
+                {
+}
+            ).addTo(feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf);
+        
+    
+            var icon_2d1ae1af2a4593482c59cee3a323d1d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "pagelines",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0b30fcab4f82472b5b061818b5007d1b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7244b640f1cc1bba74af8e84e3be4255 = $(`<div id="html_7244b640f1cc1bba74af8e84e3be4255" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#E9A020;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Volta River Aquaculture Corridor</b><br>             <span style="font-size:11px;opacity:0.9;">Bono East / Oti Region — Aquaculture Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Species</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Catfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚙️ System</td>                 <td style="padding:5px 8px;">Cage and pond culture along reservoir</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Production</td>                 <td style="padding:5px 8px;font-weight:bold;color:#238B45;">~42,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">🏭 Farms</td>                 <td style="padding:5px 8px;">~1,800 registered farms</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Government-designated aquaculture development corridor</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_0b30fcab4f82472b5b061818b5007d1b.setContent(html_7244b640f1cc1bba74af8e84e3be4255);
+            
+        
+
+        marker_5dcc03e2c34b43dbb302170a3fe9d9b9.bindPopup(popup_0b30fcab4f82472b5b061818b5007d1b)
+        ;
+
+        
+    
+    
+            marker_5dcc03e2c34b43dbb302170a3fe9d9b9.bindTooltip(
+                `<div>
+                     🐟 Volta River Aquaculture Corridor
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5dcc03e2c34b43dbb302170a3fe9d9b9.setIcon(icon_2d1ae1af2a4593482c59cee3a323d1d1);
+            
+    
+            var marker_a5d0bf9ffca032e4017a00cd36727732 = L.marker(
+                [6.6, -1.55],
+                {
+}
+            ).addTo(feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf);
+        
+    
+            var icon_76d10ea74484d2680750247f17f98ba8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "pagelines",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2fd7f727fae73aba82af951784ba386f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6086a466e5995db34a76a9ff57228ed6 = $(`<div id="html_6086a466e5995db34a76a9ff57228ed6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#E9A020;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Kumasi Peri-urban Fish Farms</b><br>             <span style="font-size:11px;opacity:0.9;">Ashanti Region — Aquaculture Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Species</td>                 <td style="padding:5px 8px;font-weight:bold;">Catfish (Clarias gariepinus), Tilapia</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚙️ System</td>                 <td style="padding:5px 8px;">Earthen pond and concrete tank culture</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Production</td>                 <td style="padding:5px 8px;font-weight:bold;color:#238B45;">~28,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">🏭 Farms</td>                 <td style="padding:5px 8px;">~950 registered farms</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Major urban aquaculture cluster supplying Kumasi market</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_2fd7f727fae73aba82af951784ba386f.setContent(html_6086a466e5995db34a76a9ff57228ed6);
+            
+        
+
+        marker_a5d0bf9ffca032e4017a00cd36727732.bindPopup(popup_2fd7f727fae73aba82af951784ba386f)
+        ;
+
+        
+    
+    
+            marker_a5d0bf9ffca032e4017a00cd36727732.bindTooltip(
+                `<div>
+                     🐟 Kumasi Peri-urban Fish Farms
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a5d0bf9ffca032e4017a00cd36727732.setIcon(icon_76d10ea74484d2680750247f17f98ba8);
+            
+    
+            var marker_7a7275ed5f27ee1db20611df9d6bbc4f = L.marker(
+                [5.7833, 0.6167],
+                {
+}
+            ).addTo(feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf);
+        
+    
+            var icon_017ef377dd9e0a37d56c95995bc5ffda = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "pagelines",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1cf744188a81075b6492bcc2e21af1b2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1f74a802afcd05b61392de9d136839c7 = $(`<div id="html_1f74a802afcd05b61392de9d136839c7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#E9A020;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Ada Estuary Shrimp Farms</b><br>             <span style="font-size:11px;opacity:0.9;">Greater Accra Region — Aquaculture Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Species</td>                 <td style="padding:5px 8px;font-weight:bold;">Giant Tiger Shrimp, Penaeus monodon</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚙️ System</td>                 <td style="padding:5px 8px;">Brackish water pond culture</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Production</td>                 <td style="padding:5px 8px;font-weight:bold;color:#238B45;">~1,200 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">🏭 Farms</td>                 <td style="padding:5px 8px;">~85 registered farms</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Only significant shrimp aquaculture site in Ghana</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_1cf744188a81075b6492bcc2e21af1b2.setContent(html_1f74a802afcd05b61392de9d136839c7);
+            
+        
+
+        marker_7a7275ed5f27ee1db20611df9d6bbc4f.bindPopup(popup_1cf744188a81075b6492bcc2e21af1b2)
+        ;
+
+        
+    
+    
+            marker_7a7275ed5f27ee1db20611df9d6bbc4f.bindTooltip(
+                `<div>
+                     🐟 Ada Estuary Shrimp Farms
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7a7275ed5f27ee1db20611df9d6bbc4f.setIcon(icon_017ef377dd9e0a37d56c95995bc5ffda);
+            
+    
+            var marker_4da439d7af1930bd7b886e5495a87f28 = L.marker(
+                [7.95, -1.7],
+                {
+}
+            ).addTo(feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf);
+        
+    
+            var icon_7395a26e69fb92a6a0461d3a72d64d85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "pagelines",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d8fd55cf14c56d61f43c80ec345f986 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c316b16fb6caef18b776d339a7a421dd = $(`<div id="html_c316b16fb6caef18b776d339a7a421dd" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Arial,sans-serif;width:280px;padding:4px;">         <div style="background:#E9A020;color:white;padding:8px 12px;                     border-radius:6px 6px 0 0;margin:-4px -4px 8px -4px;">             <b style="font-size:14px;">Brong-Ahafo Pond Culture Zone</b><br>             <span style="font-size:11px;opacity:0.9;">Bono Region — Aquaculture Fishery</span>         </div>         <table style="width:100%;font-size:12px;border-collapse:collapse;">                          <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">🐠 Species</td>                 <td style="padding:5px 8px;font-weight:bold;">Tilapia, Catfish, Mudfish</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">⚙️ System</td>                 <td style="padding:5px 8px;">Earthen pond culture — smallholder farms</td>             </tr>             <tr style="background:#f8f8f8;">                 <td style="padding:5px 8px;color:#555;">📦 Production</td>                 <td style="padding:5px 8px;font-weight:bold;color:#238B45;">~18,000 tonnes/year</td>             </tr>             <tr>                 <td style="padding:5px 8px;color:#555;">🏭 Farms</td>                 <td style="padding:5px 8px;">~620 registered farms</td>             </tr>             <tr style="background:#eaf4fb;">                 <td style="padding:5px 8px;color:#555;">ℹ️ Significance</td>                 <td style="padding:5px 8px;font-style:italic;">Emerging smallholder aquaculture zone in forest-savanna transition</td>             </tr>         </table>         <div style="margin-top:8px;font-size:10px;color:#888;text-align:center;">             Source: Ghana Fisheries Commission / FAO FishStat         </div>     </div>     </div>`)[0];
+                popup_4d8fd55cf14c56d61f43c80ec345f986.setContent(html_c316b16fb6caef18b776d339a7a421dd);
+            
+        
+
+        marker_4da439d7af1930bd7b886e5495a87f28.bindPopup(popup_4d8fd55cf14c56d61f43c80ec345f986)
+        ;
+
+        
+    
+    
+            marker_4da439d7af1930bd7b886e5495a87f28.bindTooltip(
+                `<div>
+                     🐟 Brong-Ahafo Pond Culture Zone
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4da439d7af1930bd7b886e5495a87f28.setIcon(icon_7395a26e69fb92a6a0461d3a72d64d85);
+            
+    
+            feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf.addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+        
+    
+            var layer_control_e233b15b4c2cad2fbaaef226b7c106cd_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_31960ea2fa066af8c25ed486edbc0abb,
+                    "Dark Mode" : tile_layer_25c86cf5d319301450692e708d7dfb23,
+                    "Street Map" : tile_layer_f6f64be0793d1e08bf8ab4cb08706f02,
+                },
+                overlays :  {
+                    "\ud83c\udf0a Marine Fishing Sites" : feature_group_07205a198302d403e9f6fb10d2eee347,
+                    "\ud83c\udfde\ufe0f Inland Fishing Sites" : feature_group_489859e519b0967fdef9354da819eb48,
+                    "\ud83d\udc1f Aquaculture Sites" : feature_group_4e1cb3e7d33fde0f3bc2a7bbce024ecf,
+                },
+            };
+            let layer_control_e233b15b4c2cad2fbaaef226b7c106cd = L.control.layers(
+                layer_control_e233b15b4c2cad2fbaaef226b7c106cd_layers.base_layers,
+                layer_control_e233b15b4c2cad2fbaaef226b7c106cd_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_ffa4b2eade8aa21b8ba4c658040369ab);
+
+        
+</script>
+</html>
