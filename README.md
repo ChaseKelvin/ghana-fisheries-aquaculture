@@ -40,6 +40,13 @@ Wild catch declines strongly correlate with rising SST (R² = 0.98, p < 0.0001).
 | `fig5_imports_price.png` | Fish import dependency & price trends |
 | `fig6_projection_2040.png` | Production projection to 2040 with 95% CI |
 | `qgis_fisheries_map.png` | Professional GIS map — marine, inland & aquaculture sites (QGIS) |
+## Interactive Fisheries Map
+
+[![Ghana Fisheries Map](outputs/figures/ghana_fisheries_map_preview.png)](https://nbviewer.org/github/ChaseKelvin/ghana-fisheries-aquaculture/blob/main/outputs/ghana_fisheries_map.html)
+
+> 👆 Click the image above to open the full interactive map — toggle between
+> marine, inland and aquaculture layers using the top-right control.
+> Click any marker for full site details including species, production volume and threats.
 
 ---
 
