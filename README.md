@@ -39,6 +39,7 @@ Wild catch declines strongly correlate with rising SST (R² = 0.98, p < 0.0001).
 | `fig4_climate_vs_catch.png` | SST & rainfall correlation with wild catch |
 | `fig5_imports_price.png` | Fish import dependency & price trends |
 | `fig6_projection_2040.png` | Production projection to 2040 with 95% CI |
+| `qgis_fisheries_map.png` | Professional GIS map — marine, inland & aquaculture sites (QGIS) |
 
 ---
 
